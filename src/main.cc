@@ -3,6 +3,9 @@
 #include <string>
 
 #include "PersistentVector.hh"
+#include "PersistentVectorBlock.hh"
+
+using PersistentVector = storage::v2::PersistentVector;
 
 std::size_t errors = 0;
 
@@ -35,7 +38,7 @@ std::string all_chars()
 
 void run_test_one(const std::filesystem::path &p)
 {
-  storage::v1::PersistentVector v(p);
+  PersistentVector v(p);
   using namespace std::literals;
 
   v.push_back("foo");
@@ -60,7 +63,7 @@ void run_test_one(const std::filesystem::path &p)
 
 void run_test_two(const std::filesystem::path &p)
 {
-  storage::v1::PersistentVector v(p);
+  PersistentVector v(p);
 
   CHECK(v.size() == LOOP_COUNT + 2);
   CHECK(v.at(0) == "foo");
@@ -76,7 +79,7 @@ void run_test_two(const std::filesystem::path &p)
 
 void run_test_three(const std::filesystem::path &p)
 {
-  storage::v1::PersistentVector v(p);
+  PersistentVector v(p);
 
   CHECK(v.size() == LOOP_COUNT + 1);
   CHECK(v.at(0) == "foo");
