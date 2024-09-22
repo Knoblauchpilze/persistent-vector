@@ -95,9 +95,12 @@ void run_test_three(const std::filesystem::path &p)
 
 int main(int /*argc*/, char * /*argv*/[])
 {
-  std::filesystem::current_path(std::filesystem::temp_directory_path());
+  constexpr auto DEFAULT_DATA_DIR = "dataDir";
 
-  std::filesystem::path data_dir("dataDir");
+  std::filesystem::current_path(std::filesystem::temp_directory_path());
+  std::filesystem::remove_all(DEFAULT_DATA_DIR);
+
+  std::filesystem::path data_dir(DEFAULT_DATA_DIR);
   std::filesystem::create_directory(data_dir);
 
   run_test_one(data_dir);
